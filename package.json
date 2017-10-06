@@ -1,0 +1,18 @@
+{
+  "name": "lab",
+  "version": "1.0.0",
+  "description": "The lab this week involves implementing a centralised chat server, building on your TCP multithreaded socket solution built previously. A protocol is described in detail below, that describes how clients can join chat rooms, post messages and retrieve messages, and leave chat rooms. Your task is to implement a server supporting this protocol, submit the source code repository and submit details of an executing server for testing in the normal manner.",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^2.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
