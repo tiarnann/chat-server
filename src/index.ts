@@ -1,5 +1,10 @@
+// Imports
 import * as net from "net"
 import * as colour from "chalk"
+import {CSRequestParser, CSRequestType} from "./services/request-parser"
+
+// Globals
+const parser = new CSRequestParser()
 
 const server = net.createServer((connection) => {
     const info = connection.address()
@@ -9,8 +14,11 @@ const server = net.createServer((connection) => {
     })
 
     connection.on('data',(data)=>{
-        console.log(colour.yellow(`Recevied data from ${info.address}:${info.port}`));
-        console.log(`${data.toString()}`)
+        console.log(colour.yellow(`Recevied data from ${info.address}:${info.port}`))
+        const parsed = parser.parse(data)
+        if(parsed.type == CSRequestType.Echo){
+            connection.write(`${parsed.data.message}`)
+        }
     })
 
     connection.on('end',()=>{
@@ -18,8 +26,8 @@ const server = net.createServer((connection) => {
     })
 })
 
-const port = process.env.port || 8080
+const port = parseInt(process.env.port) || 8080
 
 server.listen(port, ()=>{
-    console.log(colour.green(`====\nServer started. Listening on localhost:${port}\n====\n`));
+    console.log(colour.green(`====\nServer started. Listening on localhost:${port}\n====\n`));s
 })
