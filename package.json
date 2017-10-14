@@ -7,13 +7,14 @@
     "chalk": "^2.1.0"
   },
   "devDependencies": {
+    "@types/chalk": "^0.4.31",
     "@types/node": "^8.0.34",
     "typescript": "^2.5.3"
   },
   "scripts": {
     "prebuild": "rm -rf lib",
     "build": "mkdir lib && tsc",
-    "start": "echo 1",
+    "start": "node ./lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
