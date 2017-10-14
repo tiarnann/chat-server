@@ -3,7 +3,7 @@
 ## TODO
 - [x] Start port number
 - [ ] Kill switch 
-- [ ] Echo server
+- [x] Echo server
 - [ ] Joining
 - [ ] Leaving
 - [ ] Messaging
