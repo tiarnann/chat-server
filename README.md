@@ -1,4 +1,13 @@
-# # Internet Applications Lab
+# Internet Applications Lab
+
+## TODO
+- [ ] Start port number
+- [ ] Kill switch 
+- [ ] Echo server
+- [ ] Joining
+- [ ] Leaving
+- [ ] Messaging
+
 ## Introduction
 
 The lab this week involves implementing a centralised chat server, building on your TCP multithreaded socket solution built previously. A protocol is described in detail below, that describes how clients can join chat rooms, post messages and retrieve messages, and leave chat rooms. Your task is to implement a server supporting this protocol, submit the source code repository and submit details of an executing server for testing in the normal manner.
@@ -93,3 +102,15 @@ CHAT: [ROOM_REF]
 CLIENT_NAME: [string identifying client user]
 MESSAGE: [string terminated with '\n\n']
 ```
+
+You should write this script to launch your service by whatever means are necessary. It should be possible to terminate your service by sending the following message string to your service via the main port number:
+
+		  "KILL_SERVICE\n"
+		
+Your service should also respond to the message:
+
+		  "HELO text\n"
+		
+with the string
+
+		  "HELO text\nIP:[ip address]\nPort:[port number]\nStudentID:[your student ID]\n"
