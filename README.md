@@ -1,7 +1,7 @@
 # Internet Applications Lab
 
 ## TODO
-- [ ] Start port number
+- [x] Start port number
 - [ ] Kill switch 
 - [ ] Echo server
 - [ ] Joining
