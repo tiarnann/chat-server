@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-        "types": ["node"],
+        "types": ["node","mocha"],
         "module":"commonjs",
         "target": "es5",
+
         "noImplicitAny": false,
         "sourceMap": false,
         "rootDir": "./src/",

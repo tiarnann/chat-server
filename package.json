@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
+    "@types/mocha": "^2.2.43",
     "@types/node": "^8.0.34",
     "mocha": "^4.0.1",
     "typescript": "^2.5.3"
@@ -16,7 +17,7 @@
     "prebuild": "rm -rf lib",
     "build": "mkdir lib && tsc",
     "start": "node ./lib/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && mocha ./lib/**/*-test.js"
   },
   "author": "",
   "license": "ISC"
