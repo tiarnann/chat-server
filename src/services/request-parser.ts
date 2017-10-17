@@ -14,12 +14,14 @@ export enum CSRequestType {
 export class CSRequestRegexPattern {
     static Join = /JOIN_CHATROOM:\s([A-Za-z]*)\nCLIENT_IP:\s([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|0)\nPORT:\s([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|0)\nCLIENT_NAME:\s([A-Za-z])*\n/g
     static Echo = /HELO\s(.+)\n/
+    static Kill = /KILL_SERVICE\n/
 }
+
 
 export class CSRequestParser {
     constructor(){}
     
-    parseEcho(data: string): CSRequest{
+    parseEcho(data: string): CSRequest {
         const parsed = CSRequestRegexPattern.Echo.exec(data)
 
         if (parsed != null){
@@ -29,11 +31,22 @@ export class CSRequestParser {
         return null
     }
 
+    parseKill(data: string): CSRequest {
+        const parsed = CSRequestRegexPattern.Kill.exec(data)
+
+        if (parsed != null){
+            return {'type': CSRequestType.Kill, 'data': {}}
+        }
+        return null
+    }
+
     parse(buffer: Buffer): CSRequest {
         const data = buffer.toString()
-        
+
         if(CSRequestRegexPattern.Echo.test(data)){
             return this.parseEcho(data)
+        } else if(CSRequestRegexPattern.Kill.test(data)){
+            return this.parseKill(data)
         }
 
         return null
