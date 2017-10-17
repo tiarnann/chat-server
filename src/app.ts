@@ -1,5 +1,5 @@
 import * as net from 'net'
-import {CSRequestParser, CSRequestType} from './services/request-parser'
+import {CSRequestParser, CSRequestType} from './services/RequestParser'
 
 export default class App extends net.Server {
     private parser: CSRequestParser
