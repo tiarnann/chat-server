@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import {CSRequestParser, CSRequestType} from '../services/request-parser'
+import {CSRequestParser, CSRequestType} from '../services/RequestParser'
 
 const parser = new CSRequestParser()
 
