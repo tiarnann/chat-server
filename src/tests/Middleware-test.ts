@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import Middleware from '../services/Middleware'
+import {Middleware} from '../services/Middleware'
 
 describe('Middleware',()=>{
 
