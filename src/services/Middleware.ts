@@ -1,4 +1,8 @@
-export default class Middleware {
+import * as net from "net"
+
+export type MiddlewareHandler = (connection: net.Socket, data: any, next: Function) => void
+
+export class Middleware {
     constructor(){}
 
     go(...args) {
