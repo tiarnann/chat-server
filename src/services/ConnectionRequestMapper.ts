@@ -1,6 +1,6 @@
 import * as Middleware from "./Middleware";
 
-export default class ConnectionRequestParser extends Middleware.Middleware {
+export default class ConnectionRequestMapper extends Middleware.Middleware {
     constructor(){
         super()
     }
