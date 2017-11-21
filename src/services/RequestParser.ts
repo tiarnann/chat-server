@@ -7,11 +7,12 @@ export class ChatRequestParser {
         'JOIN_CHATROOM':'chatroomName',
         'LEAVE_CHATROOM':'roomRef',
         'DISCONNECT':'ip',
-        'CHAT':'message',
+        'CHAT':'roomRef',
         'PORT':'port',
         'JOIN_ID':'joinId',
         'CLIENT_NAME':'clientName',
-        'CLIENT_IP':'ip'
+        'CLIENT_IP':'ip',
+        'MESSAGE':'message'
     }
 
     constructor(){}

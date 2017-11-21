@@ -32,14 +32,14 @@ describe('Request',()=>{
 
     it('transform keys using the internal keymap',()=>{
         let data = {
-            'JOIN_CHATROOM' : '1',
-            'LEAVE_CHATROOM' : '2',
-            'DISCONNECT':'3',
-            'CLIENT_IP':'3',
-            'CHAT':'4',
-            'PORT':'5',
-            'JOIN_ID':'6',
-            'CLIENT_NAME':'7',
+            'JOIN_CHATROOM' : 'chatroomName',
+            'LEAVE_CHATROOM' : 'roomRef',
+            'DISCONNECT':'ip',
+            'CLIENT_IP':'ip',
+            'CHAT':'roomRef',
+            'PORT':'port',
+            'JOIN_ID':'joinId',
+            'CLIENT_NAME':'clientNmae',
         }
 
         let request = new Models.ChatRequest(Models.ChatRequestType.Echo, data, '', 0)
@@ -49,10 +49,12 @@ describe('Request',()=>{
         assert(data['JOIN_CHATROOM'] === request.data['chatroomName'])
         assert(data['LEAVE_CHATROOM'] === request.data['roomRef'])
         assert(data['DISCONNECT'] === request.data['ip'])
-        assert(data['CHAT'] === request.data['message'])
+        assert(data['CHAT'] === request.data['roomRef'])
+        assert(data['MESSAGE'] === request.data['message'])
         assert(data['PORT'] === request.data['port'])
         assert(data['JOIN_ID'] === request.data['joinId'])
         assert(data['CLIENT_IP'] === request.data['ip'])
+        assert(data['CLIENT_NAME'] === request.data['clientName'])
     })
 
     it('transform request into usable objects', ()=>{
