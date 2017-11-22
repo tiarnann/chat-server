@@ -39,13 +39,12 @@ describe('Request',()=>{
             'CHAT':'roomRef',
             'PORT':'port',
             'JOIN_ID':'joinId',
-            'CLIENT_NAME':'clientNmae',
+            'CLIENT_NAME':'clientName',
         }
 
         let request = new Models.ChatRequest(Models.ChatRequestType.Echo, data, '', 0)
         request = parser.transformDataKeys(request)
 
-        console.log(request)
         assert(data['JOIN_CHATROOM'] === request.data['chatroomName'])
         assert(data['LEAVE_CHATROOM'] === request.data['roomRef'])
         assert(data['DISCONNECT'] === request.data['ip'])
@@ -57,23 +56,23 @@ describe('Request',()=>{
         assert(data['CLIENT_NAME'] === request.data['clientName'])
     })
 
-    it('transform request into usable objects', ()=>{
-        const rawJoin = `JOIN_CHATROOM: 0\nCLIENT_IP: 1\nPORT: 123\nCLIENT_NAME: 123\n\n`
-        console.log(parser.parse(new Buffer(rawJoin)))
-        
-        let rawLeave = `LEAVE_CHATROOM: 0\nJOIN_ID: 123\nCLIENT_NAME: username\n\n`
-        console.log(parser.parse(new Buffer(rawLeave)))
+    it('transforming keys doesn\' create undefined values',()=>{
+        let data = {
+            'JOIN_CHATROOM' : 'chatroomName',
+            'LEAVE_CHATROOM' : 'roomRef',
+            'DISCONNECT':'ip',
+            'CLIENT_IP':'ip',
+            'CHAT':'roomRef',
+            'PORT':'port',
+            'JOIN_ID':'joinId',
+            'CLIENT_NAME':'clientName',
+        }
 
-        let rawDisconnect = `DISCONNECT: 0\nPORT: 0\nCLIENT_NAME: username\n\n`
-        console.log(parser.parse(new Buffer(rawDisconnect)))
+        let request = new Models.ChatRequest(Models.ChatRequestType.Echo, data, '', 0)
+        request = parser.transformDataKeys(request)
 
-        let rawChat = `CHAT: 0\nJOIN_ID: 0\nCLIENT_NAME: 0\nMESSAGE: bkjsabd askdnasjkdb asdkjnaskjdb\n\n`
-        console.log(parser.parse(new Buffer(rawChat)))
-        
-        let rawKill = `KILL_SERVICE\n\n`
-        console.log(parser.parse(new Buffer(rawKill)))
-
-        let rawHello = `HELO text\n\n`
-        console.log(parser.parse(new Buffer(rawHello)))
+        Object.keys(request.data).forEach(key => {
+            assert(request.data[key] !== undefined, 'undefined value found')
+        })
     })
 })
