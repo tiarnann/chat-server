@@ -5,40 +5,38 @@ import {Client} from '../models/client'
 describe.only('ChatsController',()=>{
     let controller: ChatsController;
     
-    before(()=>{
+    beforeEach(()=>{
         controller = new ChatsController()
     })
 
-    it('create: should make a new chat if none exist',()=>{
+    it('add: should make a new chat if none exist',()=>{
         const chatroomName = 'test room'
-        const roomRef = controller.createChat(chatroomName)
+        const roomRef = controller.addChat(chatroomName)
         
         assert.notEqual(roomRef, null)
     })
 
-    it('create: should not make a new chat if one exists with the same name',()=>{
+    it('add: should not make a new chat if one exists with the same name',()=>{
         const chatroomName = 'test room'
-        controller.createChat(chatroomName)
+        controller.addChat(chatroomName)
 
-        const roomRef = controller.createChat(chatroomName)
+        const roomRef = controller.addChat(chatroomName)
         
         assert.equal(roomRef, null)
     })
 
-    it('add: should add Client to chat if the chat exists',()=>{
+    it('remove: should delete a chat if it exists and return true',()=>{
         const chatroomName = 'test room'
-        controller.createChat(chatroomName)
+        const chat = controller.addChat(chatroomName)
 
-        const newClient = new Client('USER', '127.0.0.1', 8080)
-        const addedClient = controller.add(newClient, chatroomName)
-
-        assert.equal(addedClient, true)
+        controller.removeChat(chat.reference)
+        
+        const roomRefOfRemovedChat = controller.getRoomReference(chatroomName)
+        assert.equal(roomRefOfRemovedChat, null)
     })
 
-    it('add: should not add Client to chat if the chat does not exist',()=>{
-        const newClient = new Client('USER', '127.0.0.1', 8080)
-        const addedClient = controller.add(newClient, 'a room that does not exist')
-
-        assert.equal(addedClient, false)
+    it('remove: should do nothing if the chat does not exist and return false',()=>{
+        const chatRemoveResult = controller.removeChat(0)
+        assert.equal(chatRemoveResult, false)
     })
 })

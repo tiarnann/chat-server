@@ -3,23 +3,17 @@ import {Client} from '../models/client'
 
 export default class ChatsController {
     private chatsSeed: number
-    private joinSeed: number
 
     /* {CHATROOM_NAME:ROOM_REF} */
-    private associatedRoomRef: {string:string}
+    private associatedRoomRef: {string:number}
 
     /* {ROOM_REF:Chatroom} */
-    public chats: {string:Chatroom}
-
-    /* {JOIN_ID:Client} */
-    private clients: {string:Client}
+    public chats: {number:Chatroom}
 
     constructor(){
-        this.clients = {} as {string:Client}
-        this.chats = {} as {string:Chatroom}
+        this.chats = {} as {number:Chatroom}
         this.chatsSeed = 0
-        this.joinSeed = 0
-        this.associatedRoomRef = {} as {string:string}
+        this.associatedRoomRef = {} as {string:number}
     }
 
     /**
@@ -29,41 +23,41 @@ export default class ChatsController {
      * @returns {number} RoomReference is returned if the create was successful, otherwise null.
      * @memberof ChatsController
      */
-    createChat(name: string): number {
-        const roomRef = this.associatedRoomRef[name]
+    addChat(name: string): Chatroom {
+        const roomRef: number = this.associatedRoomRef[name]
 
         if(typeof roomRef === 'undefined'){
             const chatroomRef = this.chatsSeed
             this.chatsSeed += 1
-            this.chats[chatroomRef] = new Chatroom(name, chatroomRef)
+            const chat = new Chatroom(name, chatroomRef)
+            this.chats[chatroomRef] = chat
             this.associatedRoomRef[name] = chatroomRef
 
-            return chatroomRef
+            return chat
         }
 
         return null
     }
 
-    /**
-     * Adds client to an existing chat.
-     * 
-     * @param {Client} client 
-     * @param {string} chatroomName 
-     * @returns {boolean} True if the add was successful, otherwise false.
-     * @memberof ChatsController
-     */
-    add(client: Client, chatroomName: string): boolean {
-        const roomRef = this.associatedRoomRef[chatroomName]
-        let chat = (this.chats[roomRef]) as Chatroom
-
-        const chatExists = !!chat
+    removeChat(roomRef: number): boolean {
+        const chat = this.chats[roomRef] as Chatroom
         
-        if(!chatExists){
+        if(typeof chat === 'undefined'){
             return false
         }
 
-        chat.clients[client.name] = client
+        delete this.associatedRoomRef[chat.name]
+        delete this.chats[roomRef]
 
         return true
+    }
+
+
+    getChat(roomRef: number): Chatroom {
+        return this.chats[roomRef] || null
+    }
+
+    getRoomReference(chatroomName: string): number {
+        return this.associatedRoomRef[chatroomName] || null
     }
 }
