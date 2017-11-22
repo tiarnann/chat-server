@@ -15,8 +15,8 @@ describe('RequestTransforming',()=>{
         assert(transformedRequest instanceof Requesting.JoinChatroomRequest)
 
         const joinRequest = transformedRequest as Requesting.JoinChatroomRequest
-        assert(joinRequest.chatroomName == '0', 'chatroomName should be same from raw data')
-        assert(joinRequest.clientName == 'username', 'clientName should be same from raw data')
+        assert.equal(joinRequest.chatroomName, '0','chatroomName should be same from raw data')
+        assert.equal(joinRequest.clientName, 'username', 'clientName should be same from raw data')
     })
 
     it('should transform chat request with type leave to LeaveChatroomRequest',()=>{
@@ -28,8 +28,8 @@ describe('RequestTransforming',()=>{
         assert(transformedRequest instanceof Requesting.LeaveChatroomRequest)
 
         const leaveRequest = transformedRequest as Requesting.LeaveChatroomRequest
-        assert(leaveRequest.clientName == 'username','clientName should be same from raw data')
-        assert(leaveRequest.joinId == 123,'joinId should be same from raw data')
+        assert.equal(leaveRequest.clientName, 'username','clientName should be same from raw data')
+        assert.equal(leaveRequest.joinId, 123,'joinId should be same from raw data')
     })
 
     it('should transform chat request with type disconnect to DisconnectChatroomRequest',()=>{
@@ -41,7 +41,7 @@ describe('RequestTransforming',()=>{
         assert(transformedRequest instanceof Requesting.DisconnectChatroomRequest)
 
         const leaveRequest = transformedRequest as Requesting.DisconnectChatroomRequest
-        assert(leaveRequest.clientName == 'username','clientName should be same from raw data')
+        assert.equal(leaveRequest.clientName, 'username','clientName should be same from raw data')
     })
 
     it('should transform chat request with type message to MessageChatroomRequest',()=>{
@@ -53,9 +53,9 @@ describe('RequestTransforming',()=>{
         assert(transformedRequest instanceof Requesting.MessageChatroomRequest)
 
         const leaveRequest = transformedRequest as Requesting.MessageChatroomRequest
-        assert(leaveRequest.clientName == 'username','clientName should be same from raw data')
-        assert(leaveRequest.joinId == 9876,'joinId should be same from raw data')
-        assert(leaveRequest.message == 'bkjsabd askdnasjkdb asdkjnaskjdb','message should be same from raw data')
-        assert(leaveRequest.roomRef == 0,'roomRef should be same from raw data')
+        assert.equal(leaveRequest.clientName, 'username','clientName should be same from raw data')
+        assert.equal(leaveRequest.joinId, 9876,'joinId should be same from raw data')
+        assert.equal(leaveRequest.message, 'bkjsabd askdnasjkdb asdkjnaskjdb','message should be same from raw data')
+        assert.equal(leaveRequest.roomRef, 0,'roomRef should be same from raw data')
     })
 })
