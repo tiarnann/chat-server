@@ -21,13 +21,11 @@ export default class Server extends RequestMapper {
     }
 
     parse(connection: net.Socket, buffer: Buffer){
-        let data;
-        
         let request = this.parser.parse(buffer)
         request.data = this.transformer.transform(request.data)
 
         // Start middleware
-        this.go(connection, data)
+        this.go(connection, request)
     }
 
 
