@@ -1,7 +1,7 @@
 import * as assert from 'assert'
 import * as net from 'net'
 import RequestMapper from "../services/RequestMapper"
-import {MiddlewareHandler} from "../services/Middleware"
+import {MiddlewareHandler} from "../services/MiddlewareServer"
 
 describe('RequestMapper',() => {
     it('should map middleware to requests',() => {

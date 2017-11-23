@@ -1,6 +1,6 @@
 import * as ChatRequest from '../models/request'
 
-export class ChatRequestParser {
+export class RequestParser {
     private echoRegex = /HELO\s(.+)\n\n/
     private killRegex = /KILL_SERVICE\n\n/
     private keyMap = {
@@ -17,8 +17,15 @@ export class ChatRequestParser {
 
     constructor(){}
 
-    parse(buffer: Buffer): ChatRequest.ChatRequest {
-        const data = buffer.toString()
+    parse(buffer: Buffer);
+    parse(buffer: string);
+    parse(buffer: any): ChatRequest.ChatRequest {
+        let data: string = buffer;
+
+        if(buffer instanceof Buffer){
+            data = buffer.toString()
+            console.log(data)
+        }
 
         // Checking for echo or kill
         const killRequest = (this.killRegex).exec(data)
@@ -27,13 +34,21 @@ export class ChatRequestParser {
         }
 
         const echoRequest = (this.echoRegex).exec(data)
+        console.log(data == "HELO text\n\n")
         if(echoRequest){
             const reply = echoRequest[1] || ""
-            return new ChatRequest.ChatRequest(ChatRequest.ChatRequestType.Echo, {"message": reply}, null, null)
+            return new ChatRequest.ChatRequest(ChatRequest.ChatRequestType.Echo, {"data":{"message": reply}}, null, null)
         }
 
         // Parse as generic
-        return this.genericParse(data)
+        let parsed = this.genericParse(data)
+        if(parsed != null){
+            const {ip, port} = parsed.data
+            parsed.ip = ip
+            parsed.port = port
+        }
+
+        return parsed
     }
 
     genericParse(data: string): ChatRequest.ChatRequest{
@@ -84,7 +99,7 @@ export class ChatRequestParser {
         },{})
 
         request.data = transformedData
-        
+
         return request
     }
 }

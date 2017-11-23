@@ -1,13 +1,15 @@
 import * as Parsing from './RequestParser'
 import * as Requesting from '../models/request'
-import * as Middleware from './Middleware'
+import * as net from 'net'
 
-export default class RequestTransformer extends Middleware.Middleware {
-    constructor(){
-        super()
-    }
+export default class RequestTransformer {
+    constructor(){}
 
     transform(request: Requesting.ChatRequest): {clientName: string} {
+        if(request.type == Requesting.ChatRequestType.Echo || request.type == Requesting.ChatRequestType.Kill){
+            return null
+        }
+        
         const {data, type, ip, port} = request
         const {clientName, chatroomName, roomRef, joinId, message, text} = data
 

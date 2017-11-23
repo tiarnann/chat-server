@@ -3,7 +3,7 @@ import * as Services from '../services/RequestParser'
 import * as Models from '../models/request' 
 
 describe('Request',()=>{
-    const parser = new Services.ChatRequestParser()
+    const parser = new Services.RequestParser()
 
     it('should return null for a given request with no text', ()=>{
         const message = new Buffer(`HELO\n`)

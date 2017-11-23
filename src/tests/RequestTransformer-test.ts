@@ -1,11 +1,11 @@
 import * as assert from 'assert'
 import * as Requesting from '../models/request'
 import RequestTransformer from '../services/RequestTransformer'
-import {ChatRequestParser} from '../services/RequestParser'
+import {RequestParser} from '../services/RequestParser'
 
 describe('RequestTransforming',()=>{
     const transformer = new RequestTransformer()
-    const parser = new ChatRequestParser()
+    const parser = new RequestParser()
 
     it('should transform chat request with type join to JoinChatroomRequest',()=>{
         const rawJoin = `JOIN_CHATROOM: 0\nCLIENT_IP: 1\nPORT: 123\nCLIENT_NAME: username\n\n`

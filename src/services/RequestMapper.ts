@@ -1,11 +1,11 @@
-import * as Middleware from "./Middleware";
+import * as MiddlewareServer from "./MiddlewareServer";
 
-export default class RequestMapper extends Middleware.Middleware {
+export default class RequestMapper extends MiddlewareServer.MiddlewareServer {
     constructor(){
         super()
     }
     
-    request(type: string, ...middleware: Array<Middleware.MiddlewareHandler>){
+    request(type: string, ...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         middleware.forEach((fn)=>{
             this.use(function(connection, data, next){
                 if(data.type === type){
@@ -17,19 +17,19 @@ export default class RequestMapper extends Middleware.Middleware {
         })
     }
 
-    echo(...middleware: Array<Middleware.MiddlewareHandler>){
+    echo(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         this.request('echo', ...middleware)
     }
-    kill(...middleware: Array<Middleware.MiddlewareHandler>){
+    kill(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         this.request('kill', ...middleware)
     }
-    join(...middleware: Array<Middleware.MiddlewareHandler>){
+    join(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         this.request('join', ...middleware)
     }
-    leave(...middleware: Array<Middleware.MiddlewareHandler>){
+    leave(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         this.request('leave', ...middleware)
     }
-    message(...middleware: Array<Middleware.MiddlewareHandler>){
+    message(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         this.request('message', ...middleware)
     }
 }
