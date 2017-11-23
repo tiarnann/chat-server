@@ -14,8 +14,13 @@ app.join((connection, request)=>{
     let chatroomRequest = request.data as Requests.JoinChatroomRequest
     console.log(colour.green(`Received join request`));
 
-    if(chatroomController.handleJoin(chatroomRequest) == true){
+    const message = chatroomController.handleJoin(chatroomRequest)
+
+    if(message == null){
+    console.log('error occurred in join')
     }
+
+    connection.write(message.toString())
 })
 app.leave((connection, request)=>{
     let chatroomRequest = request.data as Requests.LeaveChatroomRequest

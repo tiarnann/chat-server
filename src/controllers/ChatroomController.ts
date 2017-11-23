@@ -1,10 +1,10 @@
 /* Controllers */
 import ClientsController from './ClientsController'
 import ChatsController from './ChatsController'
-import * as Messages from '../models/message'
 
 /* Models */
 import * as Requests from '../models/request'
+import * as Messages from '../models/message'
 
 export default class ChatroomController {
     private chatsController: ChatsController
@@ -15,7 +15,7 @@ export default class ChatroomController {
         this.clientsController = new ClientsController() 
     }
 
-    handleJoin(request: Requests.JoinChatroomRequest): boolean {
+    handleJoin(request: Requests.JoinChatroomRequest): Messages.JoinedChatroomMessage {
         const {clientName, chatroomName} = request
         const joinId = this.clientsController.getClientJoinId(clientName)
         
@@ -26,10 +26,14 @@ export default class ChatroomController {
         }
 
         const chat = this.chatsController.addChat(chatroomName)
-
+        
+        if(chat != null){
+            return null
+        }
+        
         chat.clients[joinId] = client
         
-        return true
+        return new Messages.JoinedChatroomMessage(chatroomName, chat.reference,client.joinId,'0',0)
     }
 
     handleLeave(request: Requests.LeaveChatroomRequest): boolean{
