@@ -7,9 +7,9 @@ export default class RequestTransformer {
 
     transform(request: Requesting.ChatRequest): {clientName: string} {
         if(request.type == Requesting.ChatRequestType.Echo || request.type == Requesting.ChatRequestType.Kill){
-            return null
+            return request.data as {clientName: string}
         }
-        
+
         const {data, type, ip, port} = request
         const {clientName, chatroomName, roomRef, joinId, message, text} = data
 
