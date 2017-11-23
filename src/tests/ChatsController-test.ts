@@ -2,7 +2,7 @@ import * as assert from 'assert'
 import ChatsController from '../controllers/ChatsController'
 import {Client} from '../models/client'
 
-describe.only('ChatsController',()=>{
+describe('ChatsController',()=>{
     let controller: ChatsController;
     
     beforeEach(()=>{
