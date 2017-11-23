@@ -12,15 +12,16 @@ const port = parseInt(process.env.port) || 8080
 // Main requests
 app.join((connection, request)=>{
     let chatroomRequest = request.data as Requests.JoinChatroomRequest
-    console.log(colour.green(`Received join request`));
-
+    
     const message = chatroomController.handleJoin(chatroomRequest)
-
+    
     if(message == null){
-    console.log('error occurred in join')
+        console.log(colour.red('error occurred in join'))
+        return
     }
 
     connection.write(message.toString())
+    console.log(colour.green(`Received join request`));
 })
 app.leave((connection, request)=>{
     let chatroomRequest = request.data as Requests.LeaveChatroomRequest

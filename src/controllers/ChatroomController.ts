@@ -27,7 +27,7 @@ export default class ChatroomController {
 
         const chat = this.chatsController.addChat(chatroomName)
         
-        if(chat != null){
+        if(chat == null){
             return null
         }
         
