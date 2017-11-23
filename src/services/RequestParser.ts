@@ -1,7 +1,7 @@
 import * as ChatRequest from '../models/request'
 
 export class RequestParser {
-    private echoRegex = /HELO\s(.+)\n\n/
+    private echoRegex = /HELO\s(.+)/
     private killRegex = /KILL_SERVICE\n\n/
     private keyMap = {
         'JOIN_CHATROOM':'chatroomName',
