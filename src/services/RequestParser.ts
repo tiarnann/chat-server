@@ -34,7 +34,7 @@ export class RequestParser {
         }
 
         const echoRequest = (this.echoRegex).exec(data)
-        console.log(data == "HELO text")
+        console.log(echoRequest)
         if(echoRequest){
             const reply = echoRequest[1] || ""
             return new ChatRequest.ChatRequest(ChatRequest.ChatRequestType.Echo, {"data":{"message": reply}}, null, null)
