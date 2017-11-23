@@ -37,7 +37,7 @@ export class RequestParser {
         console.log(echoRequest)
         if(echoRequest){
             const reply = echoRequest[1] || ""
-            return new ChatRequest.ChatRequest(ChatRequest.ChatRequestType.Echo, {"data":{"message": reply}}, null, null)
+            return new ChatRequest.ChatRequest(ChatRequest.ChatRequestType.Echo, {"message": reply}, null, null)
         }
 
         // Parse as generic
