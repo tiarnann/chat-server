@@ -29,6 +29,8 @@ app.message((connection, request)=>{
 // Extra features
 app.echo((connection, request)=>{
     let message = request.data.message
+    let echoMessage = new Messages.EchoMessage(message,'',0)
+    connection.write(echoMessage.toString())
     console.log(colour.green(`Recevied echo event`))
 })
 
