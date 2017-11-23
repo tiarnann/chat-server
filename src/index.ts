@@ -1,34 +1,44 @@
-// Imports
-import * as net from "net"
 import * as colour from "chalk"
-import App from './app'
+import Server from './services/Server'
+import * as Requests from './models/request'
+import * as Messages from './models/message'
+import ChatroomController from './controllers/ChatroomController'
 
 // Globals
-const app = new App()
+const app = new Server()
+const chatroomController = new ChatroomController()
 const port = parseInt(process.env.port) || 8080
 
 // Main requests
-app.on('join',(connection, data)=>{
+app.join((connection, request)=>{
+    let chatroomRequest = request.data as Requests.JoinChatroomRequest
     console.log(colour.green(`Received join request`));
+
+    if(chatroomController.handleJoin(chatroomRequest) == true){
+    }
 })
-app.on('leave',(connection, data)=>{
+app.leave((connection, request)=>{
+    let chatroomRequest = request.data as Requests.LeaveChatroomRequest
     console.log(colour.green(`Received leave request.`));
 })
-app.on('message',(connection, data)=>{
+app.message((connection, request)=>{
+    let chatroomRequest = request.data as Requests.MessageChatroomRequest
     console.log(colour.green(`Recevied message.`));
 })
 
 // Extra features
-app.on('echo',(connection, data)=>{
+app.echo((connection, request)=>{
+    let message = request.data.message
     console.log(colour.green(`Recevied echo event`))
 })
 
-app.on('kill',(connection, data)=>{
+app.kill((connection, request)=>{
     console.log(colour.green(`Recevied kill service request. Closing socket`))
     app.close()
     process.exit(0)
 })
 
 app.listen(port, ()=>{
-    console.log(colour.green(`====\nServer started. Listening on localhost:${port}\n====\n`));
+    console.log(colour.green(`====\nServer started. Listening on ${port}\n====\n`));
 })
+
