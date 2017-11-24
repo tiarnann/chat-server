@@ -16,7 +16,7 @@ export class JoinedChatroomMessage {
     constructor(public chatroomName: string, public roomReference: number, public joinId: number, public ip: string, public port: number){}
 
     toString(){
-        return `JOINED_CHATROOM: ${this.chatroomName}\nSERVER_IP: ${this.ip}\nPORT: ${this.port}\nROOM_REF: ${this.roomReference}\nJOIN_ID: ${this.joinId}\n\n`
+        return `JOINED_CHATROOM: ${this.chatroomName}\nSERVER_IP:${this.ip}\nPORT: ${this.port}\nROOM_REF: ${this.roomReference}\nJOIN_ID: ${this.joinId}\n\n`
     }
 }
 
