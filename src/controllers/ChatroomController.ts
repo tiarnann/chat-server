@@ -43,8 +43,8 @@ export default class ChatroomController {
         chat.clients[joinId] = client
 
         // Replying to client
-        const joinMessage = new Messages.JoinedChatroomMessage(chatroomName, chat.reference, client.joinId, '0', 0).toString()
-        
+        const joinMessage = new Messages.JoinedChatroomMessage(chatroomName, chat.reference, client.joinId, '0.0.0.0', 0).toString()
+        socket.write(joinMessage)
         
         // Broadcast event to all clients within chat
         Object.keys(chat.clients).forEach(key => {
