@@ -24,6 +24,9 @@ export default class Server extends RequestMapper {
         let request = this.parser.parse(buffer)
         request.data = this.transformer.transform(request)
 
+        // attach connection
+        request.connection = connection
+        
         // Start middleware
         this.go(connection, request)
     }
