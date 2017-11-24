@@ -24,7 +24,6 @@ export class RequestParser {
 
         if(buffer instanceof Buffer){
             data = buffer.toString()
-            console.log(data)
         }
 
         // Checking for echo or kill
@@ -34,7 +33,6 @@ export class RequestParser {
         }
 
         const echoRequest = (this.echoRegex).exec(data)
-        console.log(echoRequest)
         if(echoRequest){
             const reply = echoRequest[1] || ""
             return new ChatRequest.ChatRequest(ChatRequest.ChatRequestType.Echo, {"message": reply}, null, null)
