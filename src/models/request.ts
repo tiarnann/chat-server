@@ -16,7 +16,8 @@ export enum ChatRequestType {
     Message = 'message',
     Echo = 'echo',
     Kill = 'kill',
-    Disconnect = 'disconnect'
+    Disconnect = 'disconnect',
+    Unknown = 'unknown'      
 }
 
 /*
