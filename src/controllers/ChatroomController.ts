@@ -44,7 +44,9 @@ export default class ChatroomController {
 
         // Replying to client
         const joinMessage = new Messages.JoinedChatroomMessage(chatroomName, chat.reference, client.joinId, '0', 0).toString()
+
         socket.write(joinMessage)
+        return true
     }
 
     handleLeave(request: Requests.ChatRequest): boolean {

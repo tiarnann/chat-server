@@ -16,7 +16,7 @@ export class JoinedChatroomMessage {
     constructor(public chatroomName: string, public roomReference: number, public joinId: number, public ip: string, public port: number){}
 
     toString(){
-        return `JOINED_CHATROOM: ${this.chatroomName}\nSERVER_IP:${this.ip}\nPORT: ${this.port}\nROOM_REF: ${this.roomReference}\nJOIN_ID: ${this.joinId}\n\n`
+        return `JOINED_CHATROOM: ${this.chatroomName}\nSERVER_IP: 0.0.0.0\nPORT: ${this.port}\nROOM_REF: ${this.roomReference}\nJOIN_ID: ${this.joinId}\n\n`
     }
 }
 
@@ -46,6 +46,6 @@ export class EchoMessage {
     constructor(public message: string, public ip: string, public port: number){}
 
     toString(){
-        return `HELO ${this.message}\nIP: ${this.ip}\nPort: ${this.port}\nStudentID :${process.env['student-id'] || 0}\n`
+        return `HELO ${this.message}\nIP: 0.0.0.0\nPort: ${this.port}\nStudentID :${process.env['student-id'] || 0}\n`
     }
 }
