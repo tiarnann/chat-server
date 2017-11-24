@@ -15,8 +15,9 @@ export default class ChatroomController {
         this.clientsController = new ClientsController() 
     }
 
-    handleJoin(request: Requests.JoinChatroomRequest): Messages.JoinedChatroomMessage {
-        const {clientName, chatroomName} = request
+    handleJoin(request: Requests.ChatRequest): Messages.JoinedChatroomMessage {
+        const joinRequest = request.data as Requests.JoinChatroomRequest
+        const {clientName, chatroomName} = joinRequest
         const joinId = this.clientsController.getClientJoinId(clientName)
         
         let client = this.clientsController.getClient(joinId)
@@ -36,8 +37,9 @@ export default class ChatroomController {
         return new Messages.JoinedChatroomMessage(chatroomName, chat.reference,client.joinId,'0',0)
     }
 
-    handleLeave(request: Requests.LeaveChatroomRequest): boolean{
-        const {clientName, joinId, roomRef} = request
+    handleLeave(request: Requests.ChatRequest): boolean {
+        const leaveRequest = request.data as Requests.LeaveChatroomRequest
+        const {clientName, joinId, roomRef} = leaveRequest
         
         const clientExists = this.clientsController.clientExistsWithName(clientName)
 
@@ -56,6 +58,13 @@ export default class ChatroomController {
         return true
     }
 
-    handleDisconnect(request: Requests.DisconnectChatroomRequest){}
-    handleMessage(request: Requests.MessageChatroomRequest){}
+    handleDisconnect(request: Requests.ChatRequest){
+        const disconnectRequest = request.data as Requests.DisconnectChatroomRequest
+        const {clientName} = disconnectRequest
+    }
+    
+    handleMessage(request: Requests.ChatRequest){
+        const messageRequest = request.data as Requests.MessageChatroomRequest
+        const {clientName, joinId, message, roomRef} = messageRequest
+    }
 }
