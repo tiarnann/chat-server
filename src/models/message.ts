@@ -38,7 +38,7 @@ export class MessageChatroomMessage {
     constructor(public roomReference: number, public clientName: string, public message: string){}
 
     toString(){
-        return `CHAT: ${this.roomReference}\nCLIENT_NAME: ${this.clientName}\nMESSAGE: ${this.message}\n\n`
+        return `CHAT: ${this.roomReference}\nCLIENT_NAME: ${this.clientName}\nMESSAGE: ${this.message}\n`
     }
 }
 
