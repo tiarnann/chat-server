@@ -40,11 +40,6 @@ export class RequestParser {
 
         // Parse as generic
         let parsed = this.genericParse(data)
-        if(parsed != null){
-            const {ip, port} = parsed.data
-            parsed.ip = ip
-            parsed.port = port
-        }
 
         return parsed
     }
@@ -83,7 +78,7 @@ export class RequestParser {
             return ChatRequest.ChatRequestType.Message
         }
 
-        return null
+        return ChatRequest.ChatRequestType.Unknown
     }
 
     transformDataKeys(request: ChatRequest.ChatRequest): ChatRequest.ChatRequest{
