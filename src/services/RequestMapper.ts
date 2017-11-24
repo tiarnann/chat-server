@@ -32,4 +32,7 @@ export default class RequestMapper extends MiddlewareServer.MiddlewareServer {
     message(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         this.request('message', ...middleware)
     }
+    disconnect(...middleware: Array<MiddlewareServer.MiddlewareHandler>){
+        this.request('disconnect', ...middleware)
+    }
 }
