@@ -1,7 +1,9 @@
+import * as net from 'net'
+
 export type ChatRequestData = {[path:string]:any} 
 
 export class ChatRequest {
-    constructor(public type: ChatRequestType, public data: ChatRequestData, public ip: string, public port:number){
+    constructor(public type: ChatRequestType, public data: ChatRequestData, public ip: string, public port:number, public connection?: net.Socket){
         if(data == null){
             this.data = {}
         }
