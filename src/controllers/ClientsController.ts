@@ -1,4 +1,5 @@
 import {Client} from '../models/client'
+import * as net from 'net'
 
 export default class ClientsController {
     private nameToJoinIdMap: {string:number}
@@ -11,13 +12,13 @@ export default class ClientsController {
         this.joinSeed = 0
     }
 
-    addClient(name: string): Client {
+    addClient(name: string, connection: net.Socket): Client {
         const joinId = this.nameToJoinIdMap[name]
         
         if(typeof joinId == 'undefined'){
             const newJoinId = this.getNewJoinId()
             
-            const newClient = new Client(name, '0', 0, newJoinId)
+            const newClient = new Client(name, '0', 0, newJoinId, connection)
             
             // Map relationships
             this.nameToJoinIdMap[name] = newJoinId

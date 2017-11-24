@@ -11,23 +11,23 @@ describe('ClientsController',()=>{
 
     it('add: should make a new client if none exist',()=>{
         const clientName = 'username'
-        const client = controller.addClient(clientName)
+        const client = controller.addClient(clientName, null)
         
         assert.notEqual(client, null)
     })
 
     it('add: should not make a new client if one exists with the same name',()=>{
         const clientName = 'username'
-        controller.addClient(clientName)
+        controller.addClient(clientName, null)
 
-        const client = controller.addClient(clientName)
+        const client = controller.addClient(clientName, null)
         
         assert.equal(client, null)
     })
 
     it('remove: should delete a client if it exists and return true',()=>{
         const clientName = 'username'
-        const client = controller.addClient(clientName)
+        const client = controller.addClient(clientName, null)
 
         controller.removeClient(client.joinId)
         
@@ -42,7 +42,7 @@ describe('ClientsController',()=>{
 
     it('get: should return client when one exists',()=>{
         const clientName = 'username'
-        const addedClient = controller.addClient(clientName)
+        const addedClient = controller.addClient(clientName, null)
 
         const client = controller.getClient(addedClient.joinId)
 
@@ -63,7 +63,7 @@ describe('ClientsController',()=>{
         const clientDoesntExists = controller.clientExistsWithName(clientName)
         assert.equal(clientDoesntExists, false,'client should not exist yet')
 
-        const client = controller.addClient(clientName)
+        const client = controller.addClient(clientName, null)
 
         const clientExists = controller.clientExistsWithName(clientName)
         assert.equal(clientExists, true, 'client should exist after addition')
@@ -75,7 +75,7 @@ describe('ClientsController',()=>{
         const nonexistentJoinId = controller.getClientJoinId(clientName)
         assert.equal(nonexistentJoinId, null)
 
-        const client = controller.addClient(clientName)        
+        const client = controller.addClient(clientName, null)        
         const retrievedJoinId = controller.getClientJoinId(clientName)
 
         assert.equal(retrievedJoinId, client.joinId)
