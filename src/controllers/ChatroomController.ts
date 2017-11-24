@@ -27,6 +27,7 @@ export default class ChatroomController {
 
         // Creating client if it does not exist
         if(joinId == null){
+            console.log('user not found')
             client = this.clientsController.addClient(clientName, socket)
         }
 
@@ -34,6 +35,7 @@ export default class ChatroomController {
         const chat = this.chatsController.addChat(chatroomName)
         
         if(chat == null){
+            console.log('chat not found')
             return null
         }
         
