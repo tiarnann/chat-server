@@ -1,12 +1,29 @@
 # Internet Applications Lab
+## Current Test Score: 100
+
+## Guide
+
+### Fetch Dependencies
+Make sure you have nodeJS installed. Then run the following
+```bash
+	npm install
+```
+
+### Running
+To run the project run the following, in the root directory
+```bash
+	$ ./compile.sh port_number
+```
+
 
 ## TODO
 - [x] Start port number
 - [x] Kill switch 
 - [x] Echo server
-- [ ] Joining
-- [ ] Leaving
-- [ ] Messaging
+- [x] Joining
+- [x] Leaving
+- [x] Messaging
+- [ ] Error Protocol Responses
 
 ## Introduction
 
@@ -105,12 +122,14 @@ MESSAGE: [string terminated with '\n\n']
 
 You should write this script to launch your service by whatever means are necessary. It should be possible to terminate your service by sending the following message string to your service via the main port number:
 
-		  "KILL_SERVICE\n"
+```KILL_SERVICE\n
 		
 Your service should also respond to the message:
-
-		  "HELO text\n"
+```
+HELO text\n
+```
 		
 with the string
-
-		  "HELO text\nIP:[ip address]\nPort:[port number]\nStudentID:[your student ID]\n"
+```
+HELO text\nIP:[ip address]\nPort:[port number]\nStudentID:[your student ID]\n"
+```
