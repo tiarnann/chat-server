@@ -8,7 +8,6 @@ export default class RequestMapper extends MiddlewareServer.MiddlewareServer {
     request(type: string, ...middleware: Array<MiddlewareServer.MiddlewareHandler>){
         middleware.forEach((fn)=>{
             this.use(function(connection, data, next){
-                console.log(data)
                 if(data.type === type){
                     fn.call(null, connection, data, next)
                 } else {
