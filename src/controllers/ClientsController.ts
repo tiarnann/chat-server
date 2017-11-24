@@ -15,7 +15,7 @@ export default class ClientsController {
     addClient(name: string, connection: net.Socket): Client {
         const joinId = this.nameToJoinIdMap[name]
         
-        if(typeof joinId == 'undefined'){
+        if(typeof joinId == 'undefined' || joinId == null){
             const newJoinId = this.getNewJoinId()
             
             const newClient = new Client(name, '0', 0, newJoinId, connection)
@@ -53,17 +53,11 @@ export default class ClientsController {
     }
 
     getClientJoinId(name: string): number {
-        const joinId = this.nameToJoinIdMap[name]
-
-        if(typeof joinId === 'undefined'){
-            return null
-        }
-
-        return joinId
+        return this.nameToJoinIdMap[name]
     }
 
     clientExistsWithName(name: string): boolean {
-        return (this.getClientJoinId(name) != null)
+        return (typeof this.getClientJoinId(name) != 'undefined')
     }
 
     getNewJoinId(): number {

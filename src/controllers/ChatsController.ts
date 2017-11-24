@@ -58,6 +58,6 @@ export default class ChatsController {
     }
 
     getRoomReference(chatroomName: string): number {
-        return this.associatedRoomRef[chatroomName] || null
+        return this.associatedRoomRef[chatroomName]
     }
 }
