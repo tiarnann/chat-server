@@ -10,33 +10,31 @@ const chatroomController = new ChatroomController()
 const port = parseInt(process.env.port) || 8080
 
 // Main requests
-app.join((connection, request)=>{
-    let chatroomRequest = request.data as Requests.JoinChatroomRequest
-    
-    const message = chatroomController.handleJoin(chatroomRequest)
+app.join((connection, request)=> {
+    const message = chatroomController.handleJoin(request)
     
     if(message == null){
         console.log(colour.red('error occurred in join'))
         return
     }
-
-    connection.write(message.toString())
     console.log(colour.green(`Received join request`));
 })
+
 app.leave((connection, request)=>{
-    let chatroomRequest = request.data as Requests.LeaveChatroomRequest
     console.log(colour.green(`Received leave request.`));
 })
+
 app.message((connection, request)=>{
-    let chatroomRequest = request.data as Requests.MessageChatroomRequest
     console.log(colour.green(`Recevied message.`));
 })
 
 // Extra features
 app.echo((connection, request)=>{
     let message = request.data.message
+
     let echoMessage = new Messages.EchoMessage(message,'',0)
     connection.write(echoMessage.toString())
+
     console.log(colour.green(`Recevied echo event`))
 })
 
