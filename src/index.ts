@@ -13,7 +13,7 @@ const port = parseInt(process.env.port) || 8080
 app.join((connection, request)=> {
     const message = chatroomController.handleJoin(request)
     
-    if(message == null){
+    if(message == false){
         console.log(colour.red('error occurred in join'))
         return
     }
@@ -32,7 +32,7 @@ app.message((connection, request)=>{
 app.echo((connection, request)=>{
     let message = request.data.message
 
-    let echoMessage = new Messages.EchoMessage(message,'',0)
+    let echoMessage = new Messages.EchoMessage(message,'0',0)
     connection.write(echoMessage.toString())
 
     console.log(colour.green(`Recevied echo event`))
