@@ -23,7 +23,9 @@ To run the project run the following, in the root directory
 - [x] Joining
 - [x] Leaving
 - [x] Messaging
-- [ ] Error Protocol Responses
+- [ ] Error Protocol Responses*
+
+**Note: I spoke to Stephen about this part, he acknowledged the Error protocol implementation breaks the test so he said leave it out**
 
 ## Introduction
 
